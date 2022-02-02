@@ -7,13 +7,17 @@ import { NewsService } from '../news.service';
   styleUrls: ['./news.component.css']
 })
 export class NewsComponent implements OnInit {
-value;
+value='';
 articles;
+noText=false;
   constructor(private news:NewsService) { }
 
   ngOnInit(): void {
   }
 sendToService(){
+  if(this.value.trim()==''){
+    this.noText=true;
+  }
 this.news.onRequest(this.value);
 this.news.getNews().subscribe((res)=>{
   this.articles=res.articles;
